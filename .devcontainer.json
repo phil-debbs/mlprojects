@@ -1,0 +1,40 @@
+{
+	"name": "Python, Jupyter, and .NET 8 SDK",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "3.9-buster",
+			"INSTALL_NODE": "true",
+			"NODE_VERSION": "lts/*"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			},
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"ms-python.python",
+				"ms-toolsai.jupyter"
+			]
+		}
+	},
+	"remoteUser": "vscode",
+	// Mounts the project folder to '/workspace' inside the container
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	// Sets the working directory to '/workspace' inside the container
+	"workspaceFolder": "/workspace"
+}
+
+// The source=${localWorkspaceFolder} part of the workspaceMount property tells VS Code to mount the local
+// workspace folder (the folder where your .devcontainer folder is located) to a folder inside the container.
+// The target=/workspace part specifies that the mounted folder should be accessible at /workspace inside the
+// container.
+
+// The workspaceFolder property sets the default working directory for when you open a new terminal in VS Code or
+// when you start debugging.
+
+// With these settings, your current project folder will be accessible inside the container at /workspace.
+//     * Dockerfile
+//     * Defines the contents of the container
